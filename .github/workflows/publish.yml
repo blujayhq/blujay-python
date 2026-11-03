@@ -1,0 +1,41 @@
+# Publishes to PyPI when a GitHub release is published. Uses PyPI trusted
+# publishing (OIDC) through the "pypi" environment: no PyPI token is stored.
+name: Publish
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Release tag matches the library version
+        run: test "${GITHUB_REF_NAME#v}" = "$(python -c 'import re; print(re.search(r"^__version__ = \"([^\"]+)\"", open("src/blujay/_version.py").read(), re.M).group(1))')"
+      - run: python -m pip install --upgrade build
+      - run: python -m build
+      - run: ./smoke/run.sh python
+      - run: python -m pip install dist/*.whl && python tests/custom/test_webhooks.py && python tests/custom/test_client.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1

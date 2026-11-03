@@ -1,0 +1,55 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: python -m pip install --upgrade build
+      - run: python -m build
+      - run: ./smoke/run.sh python
+      - name: Webhook and client tests
+        run: python -m pip install dist/*.whl && python tests/custom/test_webhooks.py && python tests/custom/test_client.py
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pyright==1.1.414 httpx "pydantic>=2" typing_extensions
+      - name: Type-check README samples and examples
+        run: python scripts/check_docs.py
+  pydantic-v1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: python -m pip install --upgrade build
+      - run: python -m build
+      - run: python -m pip install dist/*.whl "pydantic<2"
+      - name: Webhook and client tests with Pydantic 1
+        run: python tests/custom/test_webhooks.py && python tests/custom/test_client.py
+      - name: Quickstart with Pydantic 1
+        run: |
+          node smoke/mock-server.mjs /tmp/requests.log & sleep 1
+          BLUJAY_API_KEY=blu_test BLUJAY_BASE_URL=http://127.0.0.1:4010 python smoke/quickstart.py
