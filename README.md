@@ -22,7 +22,6 @@ Requires Python 3.9 or later. Works with Pydantic 1 and 2, and ships type hints.
 
 ```python
 import os
-import uuid
 
 from blujay import Blujay
 
@@ -33,11 +32,12 @@ client = Blujay(
 sent = client.chats.create(
     to=["+15555550123"],
     message={"parts": [{"type": "text", "text": "Hi! Thanks for reaching out."}]},
-    idempotency_key=str(uuid.uuid4()),
 )
 
 print(sent.data.chat_id, sent.data.message.id)
 ```
+
+Have more than one Blujay number? Add `from_="+15555550100"` to choose which one sends. To retry a send safely, see [Retries and idempotency](#retries-and-idempotency).
 
 Workspace owners and admins find the API key in Blujay under **API** in the sidebar. Keep it on your server; never ship it to a browser or app.
 
@@ -185,7 +185,8 @@ Reads (`GET`) are retried up to 2 times, with backoff, when the connection fails
 Writes (`POST`, `PUT`, `PATCH`, `DELETE`), including every send and edit, are never retried automatically: if Blujay accepted a send but the response was lost, a retry would text the person twice. Instead, pass an `idempotency_key` on sends. Retrying with the **same** key is always safe; Blujay returns the original result instead of sending again.
 
 ```python
-key = str(uuid.uuid4())  # store it with your own record of the send
+# Tie the key to the event, so a retry reuses it.
+key = "order-1042-shipped"
 client.chats.messages.send(chat_id="chat_abc123", message=message, idempotency_key=key)
 ```
 
