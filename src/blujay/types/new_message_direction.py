@@ -2,4 +2,4 @@
 
 import typing
 
-QueuedMessageDirection = typing.Union[typing.Literal["outbound"], typing.Any]
+NewMessageDirection = typing.Union[typing.Literal["outbound"], typing.Any]

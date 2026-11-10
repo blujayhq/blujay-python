@@ -4957,6 +4957,178 @@ client.chats.typing.stop(
 </dl>
 </details>
 
+## Contacts Notes
+<details><summary><code>client.contacts.notes.<a href="src/blujay/contacts/notes/client.py">list</a>(...) -> ContactNoteListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the contact's notes, newest first. Notes come from your team in Blujay, the API and automations like Zapier.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from blujay import Blujay
+from blujay.environment import BlujayEnvironment
+
+client = Blujay(
+    api_key="<token>",
+    environment=BlujayEnvironment.PRODUCTION,
+)
+
+client.contacts.notes.list(
+    contact_id="contact_abc123",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contact_id:** `ContactId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Maximum number of items to return.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `typing.Optional[str]` — The `next_cursor` value from the previous page. Leave it out to get the first page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contacts.notes.<a href="src/blujay/contacts/notes/client.py">create</a>(...) -> ContactNoteCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds a note to the contact. Your team sees it on the contact in Blujay, newest first. Send an `Idempotency-Key` to retry safely.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from blujay import Blujay
+from blujay.environment import BlujayEnvironment
+
+client = Blujay(
+    api_key="<token>",
+    environment=BlujayEnvironment.PRODUCTION,
+)
+
+client.contacts.notes.create(
+    contact_id="contact_abc123",
+    text="SamCart purchase: Pro Coaching (annual)",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contact_id:** `ContactId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**text:** `str` — The note. Leading and trailing spaces are trimmed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Message Reactions
 <details><summary><code>client.messages.reactions.<a href="src/blujay/messages/reactions/client.py">add</a>(...) -> MessageReactionAddResponse</code></summary>
 <dl>
@@ -4972,7 +5144,7 @@ client.chats.typing.stop(
 
 Adds a tapback to a message in an iMessage chat, from the Blujay phone number the chat belongs to. You can react to messages your contacts sent and to your own. The six standard reactions are `love`, `like`, `dislike`, `laugh`, `emphasize` and `question`. To react with any emoji, send `type: custom` with `emoji` set to exactly one emoji, such as `😍` or `👍🏽`. A symbol sent without its emoji style, such as `❤`, is sent and reported as iPhones send it (`❤️`). A message can carry one reaction per person on each part, so adding a different one, standard or emoji, replaces yours. Recipients on iOS 17 or earlier see an emoji reaction as the text "Reacted 😍 to …".
 
-Stickers contacts put on your messages arrive as `sticker` reactions, but you can't send stickers (`400 VALIDATION_ERROR`). A phone number that can't send emoji reactions yet returns `502 CHANGE_REJECTED`.
+Stickers contacts put on your messages arrive as `sticker` reactions, but you can't send stickers (`400 VALIDATION_ERROR`).
 
 A `202` means Blujay accepted the reaction and is sending it. Confirm it through the `reaction.added` webhook, where `reactor` is your phone number. If you already have that reaction on the message, Blujay returns `202` without sending it again. Send an `Idempotency-Key` so a retry after a lost response is safe.
 

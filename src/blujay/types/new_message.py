@@ -12,22 +12,22 @@ from .member_id import MemberId
 from .message_id import MessageId
 from .message_output_part import MessageOutputPart
 from .message_reply_to_info import MessageReplyToInfo
-from .queued_message_delivery_status import QueuedMessageDeliveryStatus
-from .queued_message_direction import QueuedMessageDirection
-from .queued_message_preferred_service import QueuedMessagePreferredService
-from .queued_message_service import QueuedMessageService
+from .new_message_delivery_status import NewMessageDeliveryStatus
+from .new_message_direction import NewMessageDirection
+from .new_message_preferred_service import NewMessagePreferredService
+from .new_message_service import NewMessageService
 
 
-class QueuedMessage(UncheckedBaseModel):
+class NewMessage(UncheckedBaseModel):
     id: MessageId
-    direction: QueuedMessageDirection
-    delivery_status: QueuedMessageDeliveryStatus
-    preferred_service: typing.Optional[QueuedMessagePreferredService] = pydantic.Field(default=None)
+    direction: NewMessageDirection
+    delivery_status: NewMessageDeliveryStatus
+    preferred_service: typing.Optional[NewMessagePreferredService] = pydantic.Field(default=None)
     """
     The service you asked for, or null for Auto.
     """
 
-    service: typing.Optional[QueuedMessageService] = pydantic.Field(default=None)
+    service: typing.Optional[NewMessageService] = pydantic.Field(default=None)
     """
     The service that actually carried the message, once confirmed. Null until then.
     """

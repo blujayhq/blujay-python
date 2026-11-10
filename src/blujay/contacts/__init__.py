@@ -21,6 +21,11 @@ if typing.TYPE_CHECKING:
         ContactUpdateResponse,
         ContactUpsertResponse,
     )
+    from . import notes
+    from .notes import (
+        ContactNoteCreateResponse,
+        ContactNoteListResponse,
+    )
 _dynamic_imports: typing.Dict[str, str] = {
     "ContactAddTagResponse": ".types",
     "ContactAssignResponse": ".types",
@@ -28,6 +33,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ContactGetResponse": ".types",
     "ContactListResponse": ".types",
     "ContactMarkCompletedResponse": ".types",
+    "ContactNoteCreateResponse": ".notes",
+    "ContactNoteListResponse": ".notes",
     "ContactOptOutAddressResponse": ".types",
     "ContactOptOutResponse": ".types",
     "ContactRemoveOptOutResponse": ".types",
@@ -35,6 +42,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ContactStage": ".types",
     "ContactUpdateResponse": ".types",
     "ContactUpsertResponse": ".types",
+    "notes": ".notes",
 }
 
 
@@ -66,6 +74,8 @@ __all__ = [
     "ContactGetResponse",
     "ContactListResponse",
     "ContactMarkCompletedResponse",
+    "ContactNoteCreateResponse",
+    "ContactNoteListResponse",
     "ContactOptOutAddressResponse",
     "ContactOptOutResponse",
     "ContactRemoveOptOutResponse",
@@ -73,4 +83,5 @@ __all__ = [
     "ContactStage",
     "ContactUpdateResponse",
     "ContactUpsertResponse",
+    "notes",
 ]

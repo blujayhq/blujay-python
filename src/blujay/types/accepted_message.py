@@ -6,12 +6,12 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .chat_id import ChatId
-from .queued_message import QueuedMessage
+from .new_message import NewMessage
 
 
 class AcceptedMessage(UncheckedBaseModel):
     chat_id: ChatId
-    message: QueuedMessage
+    message: NewMessage
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

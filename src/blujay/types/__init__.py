@@ -82,6 +82,9 @@ if typing.TYPE_CHECKING:
     from .contact_card_profile_status import ContactCardProfileStatus
     from .contact_id import ContactId
     from .contact_list import ContactList
+    from .contact_note import ContactNote
+    from .contact_note_list import ContactNoteList
+    from .contact_note_source import ContactNoteSource
     from .contact_search_result import ContactSearchResult
     from .contact_stage_action_result import ContactStageActionResult
     from .contact_suppression import ContactSuppression
@@ -166,6 +169,11 @@ if typing.TYPE_CHECKING:
     from .message_unsent_webhook_event_api_version import MessageUnsentWebhookEventApiVersion
     from .message_webhook_recipient import MessageWebhookRecipient
     from .message_webhook_recipient_type import MessageWebhookRecipientType
+    from .new_message import NewMessage
+    from .new_message_delivery_status import NewMessageDeliveryStatus
+    from .new_message_direction import NewMessageDirection
+    from .new_message_preferred_service import NewMessagePreferredService
+    from .new_message_service import NewMessageService
     from .phone_number import PhoneNumber
     from .phone_number_access_type import PhoneNumberAccessType
     from .phone_number_assigned_webhook_data import PhoneNumberAssignedWebhookData
@@ -190,11 +198,6 @@ if typing.TYPE_CHECKING:
     from .phone_number_send_status import PhoneNumberSendStatus
     from .phone_number_send_status_reason_code import PhoneNumberSendStatusReasonCode
     from .phone_number_status import PhoneNumberStatus
-    from .queued_message import QueuedMessage
-    from .queued_message_delivery_status import QueuedMessageDeliveryStatus
-    from .queued_message_direction import QueuedMessageDirection
-    from .queued_message_preferred_service import QueuedMessagePreferredService
-    from .queued_message_service import QueuedMessageService
     from .reaction_emoji import ReactionEmoji
     from .reaction_kind import ReactionKind
     from .reaction_reactor import ReactionReactor
@@ -369,6 +372,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ContactCardProfileStatus": ".contact_card_profile_status",
     "ContactId": ".contact_id",
     "ContactList": ".contact_list",
+    "ContactNote": ".contact_note",
+    "ContactNoteList": ".contact_note_list",
+    "ContactNoteSource": ".contact_note_source",
     "ContactSearchResult": ".contact_search_result",
     "ContactStageActionResult": ".contact_stage_action_result",
     "ContactSuppression": ".contact_suppression",
@@ -453,6 +459,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MessageUnsentWebhookEventApiVersion": ".message_unsent_webhook_event_api_version",
     "MessageWebhookRecipient": ".message_webhook_recipient",
     "MessageWebhookRecipientType": ".message_webhook_recipient_type",
+    "NewMessage": ".new_message",
+    "NewMessageDeliveryStatus": ".new_message_delivery_status",
+    "NewMessageDirection": ".new_message_direction",
+    "NewMessagePreferredService": ".new_message_preferred_service",
+    "NewMessageService": ".new_message_service",
     "PhoneNumber": ".phone_number",
     "PhoneNumberAccessType": ".phone_number_access_type",
     "PhoneNumberAssignedWebhookData": ".phone_number_assigned_webhook_data",
@@ -477,11 +488,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PhoneNumberSendStatus": ".phone_number_send_status",
     "PhoneNumberSendStatusReasonCode": ".phone_number_send_status_reason_code",
     "PhoneNumberStatus": ".phone_number_status",
-    "QueuedMessage": ".queued_message",
-    "QueuedMessageDeliveryStatus": ".queued_message_delivery_status",
-    "QueuedMessageDirection": ".queued_message_direction",
-    "QueuedMessagePreferredService": ".queued_message_preferred_service",
-    "QueuedMessageService": ".queued_message_service",
     "ReactionEmoji": ".reaction_emoji",
     "ReactionKind": ".reaction_kind",
     "ReactionReactor": ".reaction_reactor",
@@ -676,6 +682,9 @@ __all__ = [
     "ContactCardProfileStatus",
     "ContactId",
     "ContactList",
+    "ContactNote",
+    "ContactNoteList",
+    "ContactNoteSource",
     "ContactSearchResult",
     "ContactStageActionResult",
     "ContactSuppression",
@@ -760,6 +769,11 @@ __all__ = [
     "MessageUnsentWebhookEventApiVersion",
     "MessageWebhookRecipient",
     "MessageWebhookRecipientType",
+    "NewMessage",
+    "NewMessageDeliveryStatus",
+    "NewMessageDirection",
+    "NewMessagePreferredService",
+    "NewMessageService",
     "PhoneNumber",
     "PhoneNumberAccessType",
     "PhoneNumberAssignedWebhookData",
@@ -784,11 +798,6 @@ __all__ = [
     "PhoneNumberSendStatus",
     "PhoneNumberSendStatusReasonCode",
     "PhoneNumberStatus",
-    "QueuedMessage",
-    "QueuedMessageDeliveryStatus",
-    "QueuedMessageDirection",
-    "QueuedMessagePreferredService",
-    "QueuedMessageService",
     "ReactionEmoji",
     "ReactionKind",
     "ReactionReactor",
