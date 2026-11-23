@@ -50,7 +50,7 @@ class PhoneNumber(UncheckedBaseModel):
 
     health_status: typing.Optional[PhoneNumberHealth] = pydantic.Field(default=None)
     """
-    Dedicated-line health. Omitted on the Shared Free Plan.
+    Dedicated-line health, the same status the Phone Numbers page shows. Omitted on the Shared Free Plan and on numbers that are no longer active.
     """
 
     limits: typing.Optional[PhoneNumberLimits] = pydantic.Field(default=None)

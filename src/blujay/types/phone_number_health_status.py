@@ -2,4 +2,4 @@
 
 import typing
 
-PhoneNumberHealthStatus = typing.Union[typing.Literal["healthy", "degraded", "critical", "unknown"], typing.Any]
+PhoneNumberHealthStatus = typing.Union[typing.Literal["healthy", "degraded", "critical"], typing.Any]

@@ -183,6 +183,7 @@ if typing.TYPE_CHECKING:
     from .phone_number_capabilities_messaging import PhoneNumberCapabilitiesMessaging
     from .phone_number_capabilities_voice import PhoneNumberCapabilitiesVoice
     from .phone_number_health import PhoneNumberHealth
+    from .phone_number_health_reason_code import PhoneNumberHealthReasonCode
     from .phone_number_health_status import PhoneNumberHealthStatus
     from .phone_number_id import PhoneNumberId
     from .phone_number_limits import PhoneNumberLimits
@@ -473,6 +474,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PhoneNumberCapabilitiesMessaging": ".phone_number_capabilities_messaging",
     "PhoneNumberCapabilitiesVoice": ".phone_number_capabilities_voice",
     "PhoneNumberHealth": ".phone_number_health",
+    "PhoneNumberHealthReasonCode": ".phone_number_health_reason_code",
     "PhoneNumberHealthStatus": ".phone_number_health_status",
     "PhoneNumberId": ".phone_number_id",
     "PhoneNumberLimits": ".phone_number_limits",
@@ -783,6 +785,7 @@ __all__ = [
     "PhoneNumberCapabilitiesMessaging",
     "PhoneNumberCapabilitiesVoice",
     "PhoneNumberHealth",
+    "PhoneNumberHealthReasonCode",
     "PhoneNumberHealthStatus",
     "PhoneNumberId",
     "PhoneNumberLimits",
