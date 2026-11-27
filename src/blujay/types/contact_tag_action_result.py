@@ -22,6 +22,11 @@ class ContactTagActionResult(UncheckedBaseModel):
     name: typing.Optional[str] = None
     first_name: typing.Optional[str] = None
     last_name: typing.Optional[str] = None
+    company: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    The contact's company. Left out when the contact has none.
+    """
+
     tags: typing.List[str]
     stage: str
     assigned_team_member: typing.Optional[AssignedTeamMember] = None
